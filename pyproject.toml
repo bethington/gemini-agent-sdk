@@ -1,0 +1,44 @@
+# NOTE: This SDK is currently distributed via GitHub only (`pip install
+# git+https://github.com/bethington/gemini-cli-sdk@main`). The PyPI name
+# `gemini-cli-sdk` is owned by an unrelated project (`oneryalcin/gemini-cli-sdk`,
+# 0.1.0), so this package can't be uploaded under the same name. If/when
+# this SDK graduates to PyPI we'll rename it (`gemini-cli-sdk-bethington`
+# or similar); for now the GitHub install URL is the canonical install path.
+# See https://github.com/bethington/ghidra-mcp/issues/201 for background.
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gemini-cli-sdk"
+version = "0.2.0"
+description = "Python SDK for the Google Gemini CLI (wraps the gemini binary)"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Ben Amington"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/bethington/gemini-cli-sdk"
+Repository = "https://github.com/bethington/gemini-cli-sdk"
+Issues = "https://github.com/bethington/gemini-cli-sdk/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
