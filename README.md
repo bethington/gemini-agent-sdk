@@ -1,22 +1,34 @@
-# Gemini CLI SDK (Python)
+# gemini-agent-sdk
 
-Embed the Gemini CLI agent in your Python workflows and apps.
+An **agentic harness** for Google's Gemini CLI — drive Gemini as a
+tool-using agent from Python: native `stream-json` parsing, a full
+tool-call event stream, MCP-server wiring, and approval modes.
 
-This SDK wraps the `gemini` binary (from [`@google/gemini-cli`](https://www.npmjs.com/package/@google/gemini-cli)). It spawns the CLI in headless mode and streams JSONL events over stdout.
+This SDK wraps the `gemini` binary (from [`@google/gemini-cli`](https://www.npmjs.com/package/@google/gemini-cli)). It spawns the CLI in headless mode and streams typed JSONL events over stdout.
+
+> **Not the same as `gemini-cli-sdk`.** The PyPI package `gemini-cli-sdk`
+> ([`oneryalcin/gemini-cli-sdk`](https://github.com/oneryalcin/gemini-cli-sdk))
+> is an unrelated project — a Claude-Code-SDK-compatible chat wrapper
+> (`query()` + Pydantic models, LLM-based output parsing). This SDK is a
+> different shape: a class-based agent runner with native JSON parsing and
+> per-tool-call event objects, built for workloads where Gemini calls MCP
+> tools in a loop. The two were briefly name-collided; this package was
+> renamed `gemini-cli-sdk` → `gemini-agent-sdk` (import `gemini_cli_sdk`
+> → `gemini_agent_sdk`) so both can be installed side-by-side. See
+> [bethington/ghidra-mcp#201](https://github.com/bethington/ghidra-mcp/issues/201)
+> for the full story.
 
 ## Installation
 
-Install from this GitHub repo:
-
 ```bash
-pip install git+https://github.com/bethington/gemini-cli-sdk@main
+pip install git+https://github.com/bethington/gemini-agent-sdk@main
 ```
 
-> **PyPI note:** the name `gemini-cli-sdk` on PyPI is held by an unrelated
-> project (`oneryalcin/gemini-cli-sdk` 0.1.0) with a different API. This
-> SDK is GitHub-only for now. See
-> [bethington/ghidra-mcp#201](https://github.com/bethington/ghidra-mcp/issues/201)
-> for background and migration notes.
+If your environment can't git-clone over HTTPS, the tarball install works too:
+
+```bash
+pip install https://github.com/bethington/gemini-agent-sdk/archive/refs/heads/main.tar.gz
+```
 
 Requires Python 3.10+ and the Gemini CLI binary installed:
 
@@ -28,7 +40,7 @@ npm install -g @google/gemini-cli
 
 ```python
 import asyncio
-from gemini_cli_sdk import GeminiCli, GeminiOptions
+from gemini_agent_sdk import GeminiCli, GeminiOptions
 
 async def main():
     cli = GeminiCli(GeminiOptions(model="gemini-2.5-flash"))

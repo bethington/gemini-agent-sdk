@@ -1,19 +1,28 @@
-# NOTE: This SDK is currently distributed via GitHub only (`pip install
-# git+https://github.com/bethington/gemini-cli-sdk@main`). The PyPI name
-# `gemini-cli-sdk` is owned by an unrelated project (`oneryalcin/gemini-cli-sdk`,
-# 0.1.0), so this package can't be uploaded under the same name. If/when
-# this SDK graduates to PyPI we'll rename it (`gemini-cli-sdk-bethington`
-# or similar); for now the GitHub install URL is the canonical install path.
-# See https://github.com/bethington/ghidra-mcp/issues/201 for background.
+# gemini-agent-sdk
+#
+# An agentic harness for Google's Gemini CLI: native stream-json parsing,
+# full tool-call event stream, MCP-server wiring, and approval modes.
+#
+# Renamed from `gemini-cli-sdk` to `gemini-agent-sdk` (and the import
+# package from `gemini_cli_sdk` to `gemini_agent_sdk`) because the
+# `gemini-cli-sdk` name on PyPI belongs to an unrelated project
+# (`oneryalcin/gemini-cli-sdk`) — a Claude-Code-SDK-compatible chat
+# wrapper with a different API. The rename de-conflicts both the
+# distribution name *and* the import name, so the two SDKs can coexist
+# in one environment without the silent import-shadowing that caused
+# bethington/ghidra-mcp#201.
+#
+# `gemini-agent-sdk` is free on PyPI; this package can be uploaded there
+# directly if/when it graduates from GitHub-only distribution.
 
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gemini-cli-sdk"
+name = "gemini-agent-sdk"
 version = "0.2.0"
-description = "Python SDK for the Google Gemini CLI (wraps the gemini binary)"
+description = "Agentic Python SDK for the Google Gemini CLI — native stream-json parsing, tool-call events, MCP wiring"
 readme = "README.md"
 license = {text = "Apache-2.0"}
 requires-python = ">=3.10"
@@ -33,12 +42,14 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/bethington/gemini-cli-sdk"
-Repository = "https://github.com/bethington/gemini-cli-sdk"
-Issues = "https://github.com/bethington/gemini-cli-sdk/issues"
+Homepage = "https://github.com/bethington/gemini-agent-sdk"
+Repository = "https://github.com/bethington/gemini-agent-sdk"
+Issues = "https://github.com/bethington/gemini-agent-sdk/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Put src/ on sys.path so `pytest` works without an editable install.
+pythonpath = ["src"]

@@ -1,4 +1,4 @@
-"""Tests for gemini_cli_sdk.client — GeminiCli, options, and streaming."""
+"""Tests for gemini_agent_sdk.client — GeminiCli, options, and streaming."""
 
 import asyncio
 import json
@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from gemini_cli_sdk.client import GeminiCli, GeminiOptions, SyncResult
-from gemini_cli_sdk.events import (
+from gemini_agent_sdk.client import GeminiCli, GeminiOptions, SyncResult
+from gemini_agent_sdk.events import (
     InitEvent,
     MessageEvent,
     ResultEvent,
@@ -31,7 +31,7 @@ def test_build_args():
         allowed_mcp_servers=["ghidra-mcp"],
     )
     with patch(
-        "gemini_cli_sdk.client.find_gemini_binary", return_value="/usr/bin/gemini"
+        "gemini_agent_sdk.client.find_gemini_binary", return_value="/usr/bin/gemini"
     ):
         cli = GeminiCli(opts)
 
@@ -95,7 +95,7 @@ async def test_run_streams_events():
     mock_process.wait = AsyncMock(return_value=0)
 
     with patch(
-        "gemini_cli_sdk.client.find_gemini_binary", return_value="/usr/bin/gemini"
+        "gemini_agent_sdk.client.find_gemini_binary", return_value="/usr/bin/gemini"
     ):
         cli = GeminiCli(GeminiOptions())
 
@@ -147,7 +147,7 @@ async def test_run_sync_returns_result():
     mock_process.wait = AsyncMock(return_value=0)
 
     with patch(
-        "gemini_cli_sdk.client.find_gemini_binary", return_value="/usr/bin/gemini"
+        "gemini_agent_sdk.client.find_gemini_binary", return_value="/usr/bin/gemini"
     ):
         cli = GeminiCli(GeminiOptions())
 

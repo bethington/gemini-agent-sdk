@@ -101,11 +101,14 @@ def parse_event(data: dict[str, Any]) -> GeminiEvent | None:
         return cls(**mapped)
 
     if event_type == "result":
-        stats = data.get("stats", {})
+        # Token counts appear either as top-level keys or nested under a
+        # `stats` object depending on the Gemini CLI version. Read the
+        # top-level form first, fall back to `stats`.
+        stats = data.get("stats") or {}
         mapped = {
             "response": data.get("response", ""),
-            "input_tokens": stats.get("input_tokens", 0) if stats else 0,
-            "output_tokens": stats.get("output_tokens", 0) if stats else 0,
+            "input_tokens": data.get("input_tokens", stats.get("input_tokens", 0)),
+            "output_tokens": data.get("output_tokens", stats.get("output_tokens", 0)),
         }
         return cls(**mapped)
 

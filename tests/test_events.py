@@ -1,6 +1,6 @@
-"""Tests for gemini_cli_sdk.events — parsing JSONL dicts into typed events."""
+"""Tests for gemini_agent_sdk.events — parsing JSONL dicts into typed events."""
 
-from gemini_cli_sdk.events import (
+from gemini_agent_sdk.events import (
     ErrorEvent,
     InitEvent,
     MessageEvent,
